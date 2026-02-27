@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h3>Welcome to NeuroIQ</h3>
+    <form action="/start" method="POST">
+        <input type="text" name="name" placeholder="Enter your name" required>
+
+        <select name="difficulty" required>
+            <option value="">Select Difficulty</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <button type="submit">Start Test</button>
+    </form>
+</div>
+{% endblock %}

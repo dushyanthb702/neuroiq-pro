@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+    <h3 style="text-align:center;">🏆 Leaderboard</h3>
+
+    {% if leaderboard|length == 0 %}
+        <p style="text-align:center; color:#aaa;">No scores yet.</p>
+    {% else %}
+        {% for user in leaderboard %}
+            <div class="card" style="background:#3a3a3c;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div>
+                        <strong>#{{ loop.index }} {{ user.name }}</strong>
+                        <div style="font-size:12px; color:#aaa;">
+                            {{ user.date }}
+                        </div>
+                    </div>
+
+                    <div style="text-align:right;">
+                        <div style="font-size:18px; font-weight:600;">
+                            IQ {{ user.iq }}
+                        </div>
+                        <div style="font-size:12px; color:#aaa;">
+                            Score {{ user.score }}/5
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

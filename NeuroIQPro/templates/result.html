@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="text-align:center;">
+    <h3>Test Completed 🎉</h3>
+    <h2>{{ name }}</h2>
+
+    <div style="margin:20px 0;">
+        <div style="font-size:14px; color:#aaa;">Your IQ Score</div>
+        <div id="iqDisplay" style="font-size:40px; font-weight:700; margin-top:10px;">
+            0
+        </div>
+    </div>
+    <div class="iq-bar-container">
+    <div id="iqBar" class="iq-bar"></div>
+</div>
+
+    <div class="card" style="background:#3a3a3c;">
+        <h4>Suggestions to Improve</h4>
+        <ul style="text-align:left; padding-left:20px;">
+            {% for s in suggestions %}
+                <li>{{ s }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <a href="/" style="text-decoration:none;">
+        <button style="margin-top:15px;">Take Test Again</button>
+    </a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+    let targetIQ = {{ iq }};
+    let current = 0;
+    let display = document.getElementById("iqDisplay");
+    let iqBar = document.getElementById("iqBar");
+let percentage = (targetIQ / 160) * 100;
+iqBar.style.width = percentage + "%";
+
+    let interval = setInterval(() => {
+        if (current >= targetIQ) {
+            clearInterval(interval);
+
+            if (targetIQ >= 110) {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+
+        } else {
+            current++;
+            display.innerText = current;
+        }
+    }, 20);
+</script>
+
+{% endblock %}
