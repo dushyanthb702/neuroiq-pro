@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NeuroIQ Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="phone-container">
+
+    <div class="app-header">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+    <span>🧠 NeuroIQ Pro</span>
+    <button onclick="toggleTheme()" style="width:auto; padding:5px 10px; font-size:12px;">
+        🌙
+    </button>
+</div>
+    </div>
+
+    <div class="app-content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="bottom-nav">
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/admin">Admin</a>
+    </div>
+
+</div>
+<script>
+function toggleTheme() {
+    const body = document.body;
+
+    if (body.classList.contains("light-mode")) {
+        body.classList.remove("light-mode");
+    } else {
+        body.classList.add("light-mode");
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h4>Question {{ q_number }} / 5</h4>
+    <h3 style="margin-top:15px;">{{ question }}</h3>
+   <div class="timer-container">
+    ⏳ Time Left: <span id="timer" class="timer-normal">15</span>s
+</div>
+
+    <form method="POST">
+        {% for option in options %}
+            <button type="submit" name="answer" value="{{ option }}" class="option-btn">
+                {{ option }}
+            </button>
+        {% endfor %}
+    </form>
+</div>
+<script>
+    let timeLeft = 15;
+    let timerDisplay = document.getElementById("timer");
+
+    let tickSound = new Audio("{{ url_for('static', filename='sounds/tick.mp3') }}");
+
+    let countdown = setInterval(() => {
+        timeLeft--;
+        timerDisplay.innerText = timeLeft;
+
+        if (timeLeft <= 7 && timeLeft > 5) {
+            timerDisplay.className = "timer-warning";
+        }
+
+        if (timeLeft <= 5 && timeLeft > 0) {
+            timerDisplay.className = "timer-danger";
+            tickSound.play();
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            document.forms[0].submit();
+        }
+
+    }, 1000);
+</script>
+{% endblock %}
